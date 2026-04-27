@@ -20,7 +20,7 @@ resource "aws_security_group" "secure_sg" {
   description = "Security group remediated for Checkov lab"
 
   ingress {
-    description = "Allow SSH from anywhere - intentionally vulnerable"
+    description = "Allow SSH from internal range"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -28,10 +28,10 @@ resource "aws_security_group" "secure_sg" {
   }
 
   egress {
-    description = "Allow all outbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS outbound to internal network range"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/0"]
   }
 }
