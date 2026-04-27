@@ -6,6 +6,14 @@ resource "aws_s3_bucket" "bad_bucket" {
   bucket = "checkov-devsecops-lab-public-bucket-demo"
 }
 
+resource "aws_s3_bucket_versioning" "bad_bucket_versioning" {
+  bucket = aws_s3_bucket.bad_bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "bad_bucket_public_access" {
   bucket = aws_s3_bucket.bad_bucket.id
 
