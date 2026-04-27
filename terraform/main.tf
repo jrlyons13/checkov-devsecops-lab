@@ -15,16 +15,16 @@ resource "aws_s3_bucket_public_access_block" "bad_bucket_public_access" {
   restrict_public_buckets = true
 }
 
-resource "aws_security_group" "bad_sg" {
-  name        = "bad-security-group"
-  description = "Security group intentionally open for Checkov lab"
+resource "aws_security_group" "secure_sg" {
+  name        = "secure-security-group"
+  description = "Security group remediated for Checkov lab"
 
   ingress {
     description = "Allow SSH from anywhere - intentionally vulnerable"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/0"]
   }
 
   egress {
